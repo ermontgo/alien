@@ -27,6 +27,11 @@ function alien_lprompt_complete() {
         $ALIEN_SECTION_VCS_BRANCH_FG $ALIEN_SECTION_VCS_BRANCH_FG $ALIEN_SECTION_SEP_SYM
     fi
   fi
+
+  if [[ $ALIEN_SECTION_AZ_ENABLE != 0]]; then
+    alien_prompt_append_section "$(alien_az_subscription)" \
+      $ALIEN_SECTION_USER_FG $ALIEN_SECTION_USER_BG $ALIEN_SECTION_SEP_SYM
+  fi
   alien_prompt_end
   PROMPT=$(alien_prompt_render)
   zle && zle reset-prompt
