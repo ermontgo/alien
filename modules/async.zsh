@@ -28,10 +28,18 @@ function alien_lprompt_complete() {
     fi
   fi
 
-  if [[ $ALIEN_SECTION_AZ_ENABLE != 0]]; then
+  if [[ $ALIEN_SECTION_AZ_ENABLE != 0 ]]; then
     alien_prompt_append_section "$(alien_az_subscription)" \
-      $ALIEN_SECTION_USER_FG $ALIEN_SECTION_USER_BG $ALIEN_SECTION_SEP_SYM
+      $ALIEN_SECTION_PATH_FG $ALIEN_SECTION_PATH_BG $ALIEN_SECTION_SEP_SYM
   fi
+
+  if [[ $ALIEN_SECTION_KUBECTL_ENABLE != 0 ]]; then
+    if [[ $ALIEN_SECTION_KUBECTL_CONTEXT_ENABLE != 0 ]]; then
+      alien_prompt_append_section "$(alien_kubectl_getcontext)" \
+        $ALIEN_SECTION_USER_FG $ALIEN_SECTION_USER_BG $ALIEN_SECTION_SEP_SYM
+    fi
+  fi
+
   alien_prompt_end
   PROMPT=$(alien_prompt_render)
   zle && zle reset-prompt
